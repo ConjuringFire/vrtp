@@ -7,7 +7,7 @@ interface FilteringPanelProps {
 }
 
 /**
- * A component for filtering breweries by name and city.
+ * A component for filtering breweries by name and city
  *
  * @param {FilteringPanelProps} props the props for the FilteringPanel component
  * @returns {JSX.Element} the rendered FilteringPanel component

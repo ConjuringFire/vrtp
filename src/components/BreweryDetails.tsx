@@ -2,19 +2,34 @@
 
 import { useBreweryDetails } from '@/hooks/useBreweryDetails';
 import { useParams } from 'next/navigation';
+import { Suspense } from 'react';
+import BreweryMap from './BreweryMap';
 
+/**
+ * a brewery details component for displaying deails about a specific brewery
+ *
+ * @returns {JSX.Element} the rendered BreweryDetails component
+ */
 const BreweryDetails = () => {
+    // get brewery ID from route parameters
     const { id } = useParams();
-    const { brewery, error, loading } = useBreweryDetails({ id: id as string });
 
-    if (loading) {
-        return <p>Loading brewery details...</p>;
-    }
+    return (
+        <Suspense fallback={<p>Loading brewery details...</p>}>
+            <BreweryDetailsContent id={id as string} />
+        </Suspense>
+    );
+};
 
+const BreweryDetailsContent = ({ id }: { id: string }) => {
+    const { brewery, error } = useBreweryDetails({ id: id as string });
+
+    // display error message if fetching brewery details failed
     if (error) {
         return <p>Error: {error}</p>;
     }
 
+    // display error message if brewery is not found
     if (!brewery) {
         return <p>Brewery not found</p>;
     }
@@ -38,6 +53,12 @@ const BreweryDetails = () => {
                     {brewery.website_url}
                 </a>
             </p>
+            <Suspense fallback={<p>Loading Map...</p>}>
+                <BreweryMap
+                    latitude={brewery.latitude}
+                    longitude={brewery.longitude}
+                />
+            </Suspense>
         </div>
     );
 };

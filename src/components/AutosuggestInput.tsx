@@ -14,7 +14,7 @@ interface AutosuggestInputProps {
 }
 
 /**
- * an autosuggest input component for searching breweries.
+ * an autosuggest input component for searching breweries
  *
  * @param {AutosuggestInputProps} props the props for the AutosuggestInput component
  * @returns {JSX.Element} The rendered AutosuggestInput component
