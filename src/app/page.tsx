@@ -1,5 +1,6 @@
 'use client';
 
+import AutosuggestInput from '@/components/AutosuggestInput';
 import FilteringPanel from '@/components/FilteringPanel';
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { useState } from 'react';
@@ -44,6 +45,7 @@ export default function Home() {
     return (
         <div>
             <h1>Breweries</h1>
+            <AutosuggestInput />
             <FilteringPanel onFilter={handleFilter} />
             <table>
                 <thead>

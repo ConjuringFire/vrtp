@@ -15,7 +15,7 @@ interface UseFetchBreweriesProps {
  * custom hook to fetch paginated brewery data from the Open Brewery DB API
  *
  * @param {UseFetchBreweriesProps} props the props for the useFetchBreweries hook
- * @returns object an object containing breweries, error, loading state and total pages
+ * @returns {object} an object containing breweries, error, loading state and total pages
  */
 
 export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
