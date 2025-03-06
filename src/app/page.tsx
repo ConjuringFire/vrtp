@@ -10,17 +10,13 @@ export default function Home() {
     });
 
     const handleNextPage = () => {
-        console.log(totalPages, 'next');
         if (page < totalPages) {
-            console.log('next + 1');
             setPage(page + 1);
         }
     };
 
     const handlePreviousPage = () => {
-        console.log('prev');
         if (page > 1) {
-            console.log('prev work');
             setPage(page - 1);
         }
     };
