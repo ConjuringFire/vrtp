@@ -1,13 +1,25 @@
 'use client';
 
+import FilteringPanel from '@/components/FilteringPanel';
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { useState } from 'react';
 
 export default function Home() {
+    const [nameFilter, setNameFilter] = useState('');
+    const [cityFilter, setCityFilter] = useState('');
     const [page, setPage] = useState<number>(1);
+
     const { breweries, error, loading, totalPages } = useFetchBreweries({
+        cityFilter,
+        nameFilter,
         page
     });
+
+    const handleFilter = (name: string, city: string) => {
+        setNameFilter(name);
+        setCityFilter(city);
+        setPage(1);
+    };
 
     const handleNextPage = () => {
         if (page < totalPages) {
@@ -32,6 +44,7 @@ export default function Home() {
     return (
         <div>
             <h1>Breweries</h1>
+            <FilteringPanel onFilter={handleFilter} />
             <table>
                 <thead>
                     <tr>

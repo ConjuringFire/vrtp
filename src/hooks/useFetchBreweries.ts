@@ -6,18 +6,20 @@ import { useState, useEffect } from 'react';
 const PAGE_SIZE = 15;
 
 interface UseFetchBreweriesProps {
+    cityFilter?: string;
+    nameFilter?: string;
     page: number;
 }
 
 /**
  * custom hook to fetch paginated brewery data from the Open Brewery DB API
  *
- * @param props
- * @returns object an object containing breweries, error, loading state and total pages.
+ * @param {UseFetchBreweriesProps} props the props for the useFetchBreweries hook
+ * @returns object an object containing breweries, error, loading state and total pages
  */
 
 export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
-    const { page } = props;
+    const { cityFilter, nameFilter, page } = props;
 
     const [breweries, setBreweries] = useState<Brewery[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -38,6 +40,13 @@ export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
                 const url = new URL(baseUrl);
                 url.searchParams.set('page', page.toString());
                 url.searchParams.set('per_page', PAGE_SIZE.toString());
+
+                if (nameFilter) {
+                    url.searchParams.set('by_name', nameFilter);
+                }
+                if (cityFilter) {
+                    url.searchParams.set('by_city', cityFilter);
+                }
 
                 // use Promise.all to fetch brewery data and metadata concurrently
                 const [breweryResponse, metaResponse] = await Promise.all([
@@ -76,7 +85,7 @@ export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
 
         // fetch breweries when the page number changes
         fetchBreweries();
-    }, [page]);
+    }, [cityFilter, nameFilter, page]);
 
     // return the fetched data and state variables
     return { breweries, error, loading, totalPages };

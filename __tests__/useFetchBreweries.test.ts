@@ -1,11 +1,18 @@
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { renderHook, waitFor } from '@testing-library/react';
-import { mockBreweries, mockMetaData } from './breweries.fixtures';
+import {
+    mockBreweries,
+    mockMetaData
+} from '../__fixtures__/breweries.fixtures';
 
 // mock the global fetch function
 global.fetch = jest.fn();
 
 describe('useFetchBreweries', () => {
+    beforeEach(() => {
+        (fetch as jest.Mock).mockClear();
+    });
+
     it('should fetch breweries successfully', async () => {
         (fetch as jest.Mock)
             .mockResolvedValueOnce({
@@ -22,7 +29,7 @@ describe('useFetchBreweries', () => {
         await waitFor(() => expect(result.current.loading).toBe(false));
 
         expect(result.current.breweries).toEqual(mockBreweries);
-        expect(result.current.totalPages).toBe(1);
+        expect(result.current.totalPages).toBe(3);
         expect(result.current.error).toBeNull();
     });
 
@@ -75,5 +82,82 @@ describe('useFetchBreweries', () => {
         expect(result.current.loading).toBe(true);
 
         await waitFor(() => expect(result.current.loading).toBe(false));
+    });
+
+    it('should apply name filter', async () => {
+        const nameFilter = 'Test';
+        const filteredBreweries = mockBreweries.filter(brewery =>
+            brewery.name.includes(nameFilter)
+        );
+
+        (fetch as jest.Mock)
+            .mockResolvedValueOnce({
+                ok: true,
+                json: async () => filteredBreweries
+            })
+            .mockResolvedValueOnce({
+                ok: true,
+                json: async () => ({ total_pages: 1 })
+            });
+
+        const { result } = renderHook(() =>
+            useFetchBreweries({ page: 1, nameFilter })
+        );
+
+        await waitFor(() => expect(result.current.loading).toBe(false));
+
+        expect(result.current.breweries).toEqual(filteredBreweries);
+    });
+
+    it('should apply city filter', async () => {
+        const cityFilter = 'Test City 2';
+        const filteredBreweries = mockBreweries.filter(
+            brewery => brewery.city === cityFilter
+        );
+
+        (fetch as jest.Mock)
+            .mockResolvedValueOnce({
+                ok: true,
+                json: async () => filteredBreweries
+            })
+            .mockResolvedValueOnce({
+                ok: true,
+                json: async () => ({ total_pages: 1 })
+            });
+
+        const { result } = renderHook(() =>
+            useFetchBreweries({ page: 1, cityFilter })
+        );
+
+        await waitFor(() => expect(result.current.loading).toBe(false));
+
+        expect(result.current.breweries).toEqual(filteredBreweries);
+    });
+
+    it('should apply name and city filter', async () => {
+        const nameFilter = 'Test Brewery 2';
+        const cityFilter = 'Test City 2';
+        const filteredBreweries = mockBreweries.filter(
+            brewery =>
+                brewery.name === nameFilter && brewery.city === cityFilter
+        );
+
+        (fetch as jest.Mock)
+            .mockResolvedValueOnce({
+                ok: true,
+                json: async () => filteredBreweries
+            })
+            .mockResolvedValueOnce({
+                ok: true,
+                json: async () => ({ total_pages: 1 })
+            });
+
+        const { result } = renderHook(() =>
+            useFetchBreweries({ page: 1, nameFilter, cityFilter })
+        );
+
+        await waitFor(() => expect(result.current.loading).toBe(false));
+
+        expect(result.current.breweries).toEqual(filteredBreweries);
     });
 });
