@@ -47,12 +47,7 @@ const AutosuggestInput: React.FC<AutosuggestInputProps> = ({ onSelect }) => {
     const handleSuggestionClick = (suggestion: Suggestion) => {
         setInputValue(suggestion.name);
         setShowSuggestions(false);
-
-        if (onSelect) {
-            onSelect(suggestion.id);
-        } else {
-            router.push(`/brewery/${suggestion.id}`);
-        }
+        router.push(`/brewery/${suggestion.id}`);
     };
 
     return (

@@ -74,9 +74,9 @@ export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
                 // update state with fetched data
                 setBreweries(breweryData);
                 setTotalPages(totalPages);
-            } catch (err: any) {
+            } catch (error: any) {
                 // handle any errors during the fetch process
-                setError(err.message);
+                setError(error.message);
             } finally {
                 // set loading to false after fetch is complete
                 setLoading(false);
