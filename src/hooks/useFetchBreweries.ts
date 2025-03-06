@@ -7,12 +7,12 @@ const PAGE_SIZE = 15;
 
 interface UseFetchBreweriesProps {
     page: number;
-};
+}
 
 /**
  * custom hook to fetch paginated brewery data from the Open Brewery DB API
- * 
- * @param props  
+ *
+ * @param props
  * @returns object an object containing breweries, error, loading state and total pages.
  */
 
@@ -60,7 +60,7 @@ export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
                 const metaData = await metaResponse.json();
 
                 // calculate the total number of pages
-                const totalPages = metaData.total / PAGE_SIZE;
+                const totalPages = Math.round(metaData.total / PAGE_SIZE);
 
                 // update state with fetched data
                 setBreweries(breweryData);
@@ -73,11 +73,11 @@ export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
                 setLoading(false);
             }
         }
-        
+
         // fetch breweries when the page number changes
         fetchBreweries();
     }, [page]);
 
     // return the fetched data and state variables
     return { breweries, error, loading, totalPages };
-}
+};

@@ -1,5 +1,5 @@
 /**
- * the structure of a brewery object 
+ * the structure of a brewery object
  */
 export interface Brewery {
     id: string;
@@ -18,10 +18,10 @@ export interface Brewery {
     website_url: string | null;
     state?: string | null;
     street: string;
-};
+}
 
 /**
- * the structure of a brewery meta object 
+ * the structure of a brewery meta object
  */
 export interface BreweryMeta {
     total: number;
