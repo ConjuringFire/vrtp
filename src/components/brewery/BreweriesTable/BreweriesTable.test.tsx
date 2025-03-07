@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import BreweriesTable from './BreweriesTable';
 import { mockBreweries } from '@/fixtures/breweries.fixtures';
 import { Brewery } from '@/types/breweries.types';
-import { Column } from '@/components/common/Table/Table';
+import { ColumnProps } from '@/types/table.types';
 
 // mock next/link
 jest.mock('next/link', () => ({
@@ -30,7 +30,7 @@ jest.mock('@/components/common/Table', () => ({
         columns
     }: {
         data: Brewery[];
-        columns: Column<Brewery>[];
+        columns: ColumnProps<Brewery>[];
     }) => (
         <div data-testid="mock-table">
             {data.length > 0 &&

@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom';
 
 import { render, screen } from '@testing-library/react';
-import Table, { Column } from './Table';
+import Table from './Table';
 import { Brewery } from '@/types/breweries.types';
 import { mockBreweries } from '@/fixtures/breweries.fixtures';
 import { mockBreweryColumns } from '@/fixtures/table.fixtures';
+import { ColumnProps } from '@/types/table.types';
 
 // mock next/link
 jest.mock('next/link', () => ({
@@ -22,7 +23,7 @@ jest.mock('next/link', () => ({
     )
 }));
 
-const setup = (data: Brewery[], columns: Column<Brewery>[]) => {
+const setup = (data: Brewery[], columns: ColumnProps<Brewery>[]) => {
     render(<Table data={data} columns={columns} />);
 };
 

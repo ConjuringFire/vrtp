@@ -1,7 +1,7 @@
-import { Column } from '@/components/common/Table/Table';
 import { Brewery } from '@/types/breweries.types';
+import { ColumnProps } from '@/types/table.types';
 
-export const mockBreweryColumns: Column<Brewery>[] = [
+export const mockBreweryColumns: ColumnProps<Brewery>[] = [
     {
         header: 'Brewery Name',
         accessor: 'name',

@@ -1,16 +1,5 @@
+import { TableProps } from '@/types/table.types';
 import Link from 'next/link';
-
-export interface TableProps<T> {
-    data: T[];
-    columns: Column<T>[];
-}
-
-export interface Column<T> {
-    header: string;
-    accessor: keyof T;
-    isLink?: boolean;
-    linkAccessor?: keyof T;
-}
 
 const Table = <T extends {}>({ data, columns }: TableProps<T>) => {
     return (

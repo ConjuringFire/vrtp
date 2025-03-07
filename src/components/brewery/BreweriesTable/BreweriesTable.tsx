@@ -1,6 +1,6 @@
 import Table from '@/components/common/Table';
-import { Column } from '@/components/common/Table/Table';
 import { Brewery } from '@/types/breweries.types';
+import { ColumnProps } from '@/types/table.types';
 
 /**
  * BreweriesTable component renders a table of breweries
@@ -9,7 +9,7 @@ import { Brewery } from '@/types/breweries.types';
  */
 const BreweriesTable = ({ breweries }: { breweries: Brewery[] }) => {
     // define the columns for the table
-    const columns: Column<Brewery>[] = [
+    const columns: ColumnProps<Brewery>[] = [
         {
             header: 'Brewer Name',
             accessor: 'name',
