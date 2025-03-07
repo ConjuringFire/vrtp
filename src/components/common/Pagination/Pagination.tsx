@@ -11,6 +11,9 @@ const Pagination: React.FC<PaginationProps> = ({
     totalPages,
     onPageChange
 }) => {
+    console.log(totalPages);
+    console.log(currentPage);
+
     const getVisiblePages = () => {
         const visiblePages = [];
         let startPage = Math.max(1, currentPage - 2);
@@ -22,6 +25,10 @@ const Pagination: React.FC<PaginationProps> = ({
             } else {
                 startPage = Math.max(1, totalPages - 4);
             }
+        }
+
+        if (totalPages < 5) {
+            endPage = totalPages;
         }
 
         for (let i = startPage; i <= endPage; i++) {
@@ -63,9 +70,9 @@ const Pagination: React.FC<PaginationProps> = ({
 
             <button
                 onClick={() => onPageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
+                disabled={currentPage === totalPages || totalPages === 0}
                 className={`px-3 py-2 mx-1 rounded-md text-sm sm:text-base ${
-                    currentPage === totalPages
+                    currentPage === totalPages || totalPages === 0
                         ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                         : 'bg-blue-500 text-white hover:bg-blue-600'
                 }`}

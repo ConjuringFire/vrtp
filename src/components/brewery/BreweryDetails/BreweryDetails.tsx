@@ -4,6 +4,7 @@ import { useBreweryDetails } from '@/hooks/useBreweryDetails';
 import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
 import BreweryMap from '../MapComponent';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 
 /**
  * a brewery details component for displaying deails about a specific brewery
@@ -40,6 +41,16 @@ const BreweryDetailsContent = ({ id }: { id: string }) => {
 
     return (
         <div className="p-4 text-black">
+            <Breadcrumbs
+                breadcrumbs={[
+                    { label: 'Home', href: '/' },
+                    {
+                        label: 'Brewery',
+                        href: `/brewery/${id}`,
+                        active: true
+                    }
+                ]}
+            />
             <h1 className="text-2xl font-semibold mb-12">{brewery.name}</h1>
             <div className="bg-white rounded-2xl shadow-md p-4 mb-12">
                 <h2 className="text-lg font-semibold mb-2">Details</h2>

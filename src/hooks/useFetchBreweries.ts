@@ -43,9 +43,11 @@ export const useFetchBreweries = (props: UseFetchBreweriesProps) => {
 
                 if (nameFilter) {
                     url.searchParams.set('by_name', nameFilter);
+                    metaUrl.searchParams.set('by_name', nameFilter);
                 }
                 if (cityFilter) {
                     url.searchParams.set('by_city', cityFilter);
+                    metaUrl.searchParams.set('by_city', cityFilter);
                 }
 
                 // use Promise.all to fetch brewery data and metadata concurrently
