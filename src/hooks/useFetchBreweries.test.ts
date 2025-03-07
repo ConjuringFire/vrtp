@@ -1,9 +1,6 @@
+import { mockBreweries, mockMetaData } from '@/fixtures/breweries.fixtures';
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { renderHook, waitFor } from '@testing-library/react';
-import {
-    mockBreweries,
-    mockMetaData
-} from '../src/fixtures/breweries.fixtures';
 
 // mock the global fetch function
 global.fetch = jest.fn();
