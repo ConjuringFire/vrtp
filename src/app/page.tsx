@@ -28,18 +28,6 @@ export default function Home() {
         setPage(1);
     };
 
-    const handleNextPage = () => {
-        if (page < totalPages) {
-            setPage(page + 1);
-        }
-    };
-
-    const handlePreviousPage = () => {
-        if (page > 1) {
-            setPage(page - 1);
-        }
-    };
-
     if (loading) {
         return <p>Loading ...</p>;
     }
@@ -69,18 +57,6 @@ export default function Home() {
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
                 />
-                <div>
-                    <button onClick={handlePreviousPage} disabled={page === 1}>
-                        Previous
-                    </button>
-                    <span>Page {page}</span>
-                    <button
-                        onClick={handleNextPage}
-                        disabled={breweries.length < 15}
-                    >
-                        Next
-                    </button>
-                </div>
             </div>
         </div>
     );
