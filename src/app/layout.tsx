@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: { template: '%s | Ale Trail', default: 'Ale Trail' },
+    title: { template: '%s | The Ale Trail', default: 'The Ale Trail' },
     description:
         'Your comprehensive guide to craft breweries. Find detailed brewery information, map locations, and plan your next beer tasting experience.'
 };
@@ -27,7 +27,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-bl`}
             >
                 <Header />
                 {children}

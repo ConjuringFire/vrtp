@@ -22,7 +22,7 @@ const BreweryDetails = () => {
 };
 
 const BreweryDetailsContent = ({ id }: { id: string }) => {
-    const { brewery, error } = useBreweryDetails({ id: id as string });
+    const { brewery, error, loading } = useBreweryDetails({ id: id as string });
 
     // display error message if fetching brewery details failed
     if (error) {
@@ -31,7 +31,11 @@ const BreweryDetailsContent = ({ id }: { id: string }) => {
 
     // display error message if brewery is not found
     if (!brewery) {
-        return <p>Brewery not found</p>;
+        if (loading) {
+            return <p>Loading ...</p>;
+        } else {
+            return <p>Brewery not found</p>;
+        }
     }
 
     return (

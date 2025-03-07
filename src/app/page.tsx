@@ -42,7 +42,7 @@ export default function Home() {
                 <h1
                     className={`text-6xl font-bold text-center hidden md:block`}
                 >
-                    Welcome to Ale Trail
+                    Welcome to the Ale Trail
                 </h1>
                 <h2 className={`text-3xl font-bold text-center mb-4 md:mb-24`}>
                     Search for Breweries

@@ -11,6 +11,6 @@ describe('Header', () => {
     it('should render the header with title', () => {
         setup();
 
-        expect(screen.getByText('Ale Trail')).toBeInTheDocument();
+        expect(screen.getByText('The Ale Trail')).toBeInTheDocument();
     });
 });
