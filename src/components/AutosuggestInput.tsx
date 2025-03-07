@@ -9,17 +9,12 @@ interface Suggestion {
     name: string;
 }
 
-interface AutosuggestInputProps {
-    onSelect?: (breweryId: string) => void;
-}
-
 /**
  * an autosuggest input component for searching breweries
  *
- * @param {AutosuggestInputProps} props the props for the AutosuggestInput component
  * @returns {JSX.Element} The rendered AutosuggestInput component
  */
-const AutosuggestInput: React.FC<AutosuggestInputProps> = ({ onSelect }) => {
+const AutosuggestInput: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>('');
     const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 

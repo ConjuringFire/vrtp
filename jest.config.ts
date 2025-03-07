@@ -152,7 +152,7 @@ const config: Config = {
     // snapshotSerializers: [],
 
     // The test environment that will be used for testing
-    testEnvironment: 'jsdom'
+    testEnvironment: 'jsdom',
 
     // Options that will be passed to the testEnvironment
     // testEnvironmentOptions: {},
@@ -200,6 +200,9 @@ const config: Config = {
 
     // Whether to use watchman for file crawling
     // watchman: true,
+    moduleNameMapper: {
+        '^@/(.*)$': '<rootDir>/src/$1'
+    }
 };
 
 export default createJestConfig(config);

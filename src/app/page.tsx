@@ -1,6 +1,7 @@
 'use client';
 
 import AutosuggestInput from '@/components/AutosuggestInput';
+import BreweriesTable from '@/components/brewery/BreweriesTable';
 import FilteringPanel from '@/components/FilteringPanel';
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { useState } from 'react';
@@ -47,44 +48,7 @@ export default function Home() {
             <h1>Breweries</h1>
             <AutosuggestInput />
             <FilteringPanel onFilter={handleFilter} />
-            <table>
-                <thead>
-                    <tr>
-                        <th>Brewery Name</th>
-                        <th>Type</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>Website</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {breweries.map(brewery => (
-                        <tr key={brewery.id}>
-                            <td>
-                                <a href={`/brewery/${brewery.id}`}>
-                                    {brewery.name}
-                                </a>
-                            </td>
-                            <td>{brewery.brewery_type}</td>
-                            <td>{brewery.city}</td>
-                            <td>{brewery.country}</td>
-                            <td>
-                                {brewery.website_url && (
-                                    <a
-                                        href={brewery.website_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Visit
-                                    </a>
-                                )}
-                            </td>
-                            <td>{brewery.phone}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <BreweriesTable breweries={breweries} />
             <div>
                 <button onClick={handlePreviousPage} disabled={page === 1}>
                     Previous

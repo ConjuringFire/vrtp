@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import {
     mockBreweries,
     mockMetaData
-} from '../__fixtures__/breweries.fixtures';
+} from '../src/fixtures/breweries.fixtures';
 
 // mock the global fetch function
 global.fetch = jest.fn();

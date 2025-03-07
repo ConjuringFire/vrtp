@@ -1,0 +1,30 @@
+import Table from '@/components/common/Table';
+import { Column } from '@/components/common/Table/Table';
+import { Brewery } from '@/types/breweries.types';
+
+/**
+ * BreweriesTable component renders a table of breweries
+ * @param {Object} props the component props
+ * @param {Brewery} props.breweries an array of brewery objects to display in the table
+ */
+const BreweriesTable = ({ breweries }: { breweries: Brewery[] }) => {
+    // define the columns for the table
+    const columns: Column<Brewery>[] = [
+        {
+            header: 'Brewer Name',
+            accessor: 'name',
+            isLink: true,
+            linkAccessor: 'id'
+        },
+        { header: 'Type', accessor: 'brewery_type' },
+        { header: 'City', accessor: 'city' },
+        { header: 'Country', accessor: 'country' },
+        { header: 'Website', accessor: 'website_url' },
+        { header: 'Phone', accessor: 'phone' }
+    ];
+
+    // Render the Table component with brewery data and columns
+    return <Table data={breweries} columns={columns} />;
+};
+
+export default BreweriesTable;
