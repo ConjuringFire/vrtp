@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: { template: '%s | The Ale Trail', default: 'The Ale Trail' },
+    title: { template: '%s | Ale Trail', default: 'Ale Trail' },
     description:
         'Your comprehensive guide to craft breweries. Find detailed brewery information, map locations, and plan your next beer tasting experience.'
 };

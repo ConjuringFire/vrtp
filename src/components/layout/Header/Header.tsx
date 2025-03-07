@@ -6,7 +6,7 @@ const Header: React.FC = () => {
             <h1
                 className={`${leagueSpartan.className} text-3xl font-bold text-black`}
             >
-                The Ale Trail
+                Ale Trail
             </h1>
         </header>
     );

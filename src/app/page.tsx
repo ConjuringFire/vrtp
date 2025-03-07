@@ -1,6 +1,6 @@
 'use client';
 
-import AutosuggestInput from '@/components/AutosuggestInput';
+import AutosuggestInput from '@/components/brewery/AutosuggestInput';
 import BreweriesTable from '@/components/brewery/BreweriesTable';
 import FilteringPanel from '@/components/FilteringPanel';
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
@@ -44,22 +44,33 @@ export default function Home() {
     }
 
     return (
-        <div>
-            <h1>Breweries</h1>
-            <AutosuggestInput />
-            <FilteringPanel onFilter={handleFilter} />
-            <BreweriesTable breweries={breweries} />
-            <div>
-                <button onClick={handlePreviousPage} disabled={page === 1}>
-                    Previous
-                </button>
-                <span>Page {page}</span>
-                <button
-                    onClick={handleNextPage}
-                    disabled={breweries.length < 15}
+        <div className="bg-linear-to-bl from-[#FF3A63] to-[#D72389]">
+            <div className="max-w-screen-lg mx-auto p-8 md:p-24 w-full drop-shadow-xl text-black">
+                <h1
+                    className={`text-6xl font-bold text-center hidden md:block`}
                 >
-                    Next
-                </button>
+                    Welcome to Ale Trail
+                </h1>
+                <h2 className={`text-3xl font-bold text-center mb-4 md:mb-24`}>
+                    Search for Breweries
+                </h2>
+                <AutosuggestInput />
+            </div>
+            <FilteringPanel onFilter={handleFilter} />
+            <div className="max-w-screen-lg mx-auto p-4 w-full drop-shadow-xl">
+                <BreweriesTable breweries={breweries} />
+                <div>
+                    <button onClick={handlePreviousPage} disabled={page === 1}>
+                        Previous
+                    </button>
+                    <span>Page {page}</span>
+                    <button
+                        onClick={handleNextPage}
+                        disabled={breweries.length < 15}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     );

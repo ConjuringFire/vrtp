@@ -46,26 +46,22 @@ const AutosuggestInput: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="max-w-screen-lg mx-auto bg-white p-2 rounded-2xl shadow-sm w-full text-black">
             <input
                 type="text"
                 placeholder="Search breweries..."
                 value={inputValue}
                 onChange={handleInputChange}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                className="w-full p-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-200 border-none"
             />
             {showSuggestions && suggestions.length > 0 && (
-                <ul
-                    style={{
-                        position: 'absolute',
-                        backgroundColor: 'white',
-                        border: '1px solid #ccc'
-                    }}
-                >
+                <ul className="mt-2 bg-white rounded-2xl shadow-md">
                     {suggestions.map(suggestion => (
                         <li
                             key={suggestion.id}
                             onClick={() => handleSuggestionClick(suggestion)}
+                            className="p-3 hover:bg-gray-100 cursor-pointer rounded-2xl"
                         >
                             {suggestion.name}
                         </li>

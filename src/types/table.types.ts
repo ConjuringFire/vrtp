@@ -1,6 +1,7 @@
 export interface TableProps<T> {
     data: T[];
     columns: ColumnProps<T>[];
+    classes?: string;
 }
 
 export interface ColumnProps<T> {

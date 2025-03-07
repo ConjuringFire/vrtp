@@ -23,8 +23,14 @@ const BreweriesTable = ({ breweries }: { breweries: Brewery[] }) => {
         { header: 'Phone', accessor: 'phone' }
     ];
 
-    // Render the Table component with brewery data and columns
-    return <Table data={breweries} columns={columns} />;
+    // render the Table component with brewery data and columns
+    return (
+        <Table
+            data={breweries}
+            columns={columns}
+            classes="border-collapse border outline outline-1 outline-gray-400 overflow-hidden text-center rounded-lg shadow-sm"
+        />
+    );
 };
 
 export default BreweriesTable;

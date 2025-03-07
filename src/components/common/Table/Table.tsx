@@ -1,10 +1,12 @@
 import { TableProps } from '@/types/table.types';
 import Link from 'next/link';
 
-const Table = <T extends {}>({ data, columns }: TableProps<T>) => {
+const Table = <T extends {}>({ data, columns, classes }: TableProps<T>) => {
     return (
         <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 w-full">
+            <table
+                className={`min-w-full divide-y divide-gray-200 w-full ${classes}`}
+            >
                 <thead>
                     <tr className="hidden sm:table-row">
                         {columns.map(column => (
