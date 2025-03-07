@@ -28,7 +28,7 @@ const BreweriesTable = ({ breweries }: { breweries: Brewery[] }) => {
         <Table
             data={breweries}
             columns={columns}
-            classes="border-collapse border outline outline-1 outline-gray-400 overflow-hidden text-center rounded-lg shadow-sm"
+            classes="border-collapse border outline outline-1 outline-gray-400 overflow-hidden rounded-lg shadow-sm"
         />
     );
 };
