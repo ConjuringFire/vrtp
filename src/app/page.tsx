@@ -2,8 +2,8 @@
 
 import AutosuggestInput from '@/components/brewery/AutosuggestInput';
 import BreweriesTable from '@/components/brewery/BreweriesTable';
-import Pagination from '@/components/common/Pagination/Pagination';
-import FilteringPanel from '@/components/FilteringPanel';
+import BreweryFilter from '@/components/brewery/BreweryFilter';
+import Pagination from '@/components/common/Pagination';
 import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { useState } from 'react';
 
@@ -49,7 +49,9 @@ export default function Home() {
                 </h2>
                 <AutosuggestInput />
             </div>
-            <FilteringPanel onFilter={handleFilter} />
+            <div className="max-w-screen-lg mx-auto p-4 w-full text-black">
+                <BreweryFilter onFilter={handleFilter} />
+            </div>
             <div className="max-w-screen-lg mx-auto p-4 w-full drop-shadow-xl">
                 <BreweriesTable breweries={breweries} />
                 <Pagination
