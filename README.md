@@ -61,52 +61,6 @@ yarn test
 pnpm test
 ```
 
-## Project Structure
-
-brewery-finder/
-├── src/
-│ ├── app/
-│ │ ├── brewery/
-│ │ │ ├── [id].tsx
-│ │ ├── fonts.ts
-│ │ ├── globals.css
-│ │ ├── layout.tsx
-│ │ ├── page.tsx
-│ ├── components/
-│ │ ├── brewery/
-│ │ │ ├── AutosuggestInput/
-│ │ │ ├── BreweriesTable/
-│ │ │ ├── BreweryDetails/
-│ │ │ ├── BreweryFilter/
-│ │ │ ├── MapComponent/
-│ │ ├── common/
-│ │ │ ├── Breadcrumbs/
-│ │ │ ├── Pagination/
-│ │ │ ├── Table/
-│ ├── fixtures/
-│ │ ├── breweries.fixtures.ts
-│ │ ├── table.fixtures.ts
-│ ├── hooks/
-│ │ ├── useBreweryDetails.ts
-│ │ ├── useBrewerySuggestions.ts
-│ │ ├── useFetchBreweries.ts
-│ ├── types/
-│ │ ├── breweries.types.ts
-│ │ ├── suggestions.types.ts
-│ │ ├── table.types.ts
-├── public/
-├── package.json
-├── README.md
-├── next.config.js
-├── tailwind.config.js
-├── jest.config.js
-
-src/components/: Contains reusable React components.
-src/pages/: Contains Next.js pages.
-src/styles/: Contains global CSS styles.
-public/: Contains static assets.
-package.json: Contains project dependencies and scripts.
-
 ## Future Improvements
 
 - Add more filtering options (e.g., by state, brewery type).
