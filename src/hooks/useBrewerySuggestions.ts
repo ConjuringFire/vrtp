@@ -42,8 +42,10 @@ export const useBrewerySuggestions = (props: UseBrewerySuggestionsProps) => {
                     } else {
                         setSuggestions([]);
                     }
-                } catch (error: any) {
-                    setSuggestions([]);
+                } catch (error) {
+                    if (error instanceof Error) {
+                        setSuggestions([]);
+                    }
                 } finally {
                     setLoading(false);
                 }

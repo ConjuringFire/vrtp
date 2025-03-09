@@ -30,8 +30,10 @@ export const useBreweryDetails = (props: UseBreweryDetailsProps) => {
                 } else {
                     throw new Error('Failed to fetch brewery details');
                 }
-            } catch (error: any) {
-                setError(error);
+            } catch (error) {
+                if (error instanceof Error) {
+                    setError(error.message);
+                }
             } finally {
                 setLoading(false);
             }

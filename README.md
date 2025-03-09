@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Ale Trail (Brewery Finder App)
+
+This is a React application built with Next.js and Tailwind CSS that allows users to search and explore breweries. It fetches data from the Open Brewery DB API.
+
+## Features
+
+- **Browse Breweries:** View a list of breweries with pagination.
+- **Search and Filter:** Filter breweries by name and city.
+- **Detailed Brewery Information:** View detailed information about each brewery, including a map.
+- **Responsive Design:** The application is designed to work seamlessly on various screen sizes.
+- **URL Query Parameters:** Filter and search results are saved to the URL, making them shareable and bookmarkable.
+
+## Technologies Used
+
+- **Next.js:** React framework for server-side rendering and static site generation.
+- **React:** JavaScript library for building user interfaces.
+- **Tailwind CSS:** Utility-first CSS framework for rapid UI development.
+- **Open Brewery DB API:** Public API for brewery information.
+- **Jest and React Testing Library:** For unit and integration testing.
 
 ## Getting Started
 
-First, run the development server:
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [repository URL]
+    cd [repository directory]
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  **Run the development server:**
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+
+4.  **Open your browser and navigate to `http://localhost:3000`.**
+
+## Running Tests
+
+To run the unit and integration tests, use the following command:
 
 ```bash
-npm run dev
+npm run test
 # or
-yarn dev
+yarn test
 # or
-pnpm dev
-# or
-bun dev
+pnpm test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+brewery-finder/
+├── src/
+│ ├── app/
+│ │ ├── brewery/
+│ │ │ ├── [id].tsx
+│ │ ├── fonts.ts
+│ │ ├── globals.css
+│ │ ├── layout.tsx
+│ │ ├── page.tsx
+│ ├── components/
+│ │ ├── brewery/
+│ │ │ ├── AutosuggestInput/
+│ │ │ ├── BreweriesTable/
+│ │ │ ├── BreweryDetails/
+│ │ │ ├── BreweryFilter/
+│ │ │ ├── MapComponent/
+│ │ ├── common/
+│ │ │ ├── Breadcrumbs/
+│ │ │ ├── Pagination/
+│ │ │ ├── Table/
+│ ├── fixtures/
+│ │ ├── breweries.fixtures.ts
+│ │ ├── table.fixtures.ts
+│ ├── hooks/
+│ │ ├── useBreweryDetails.ts
+│ │ ├── useBrewerySuggestions.ts
+│ │ ├── useFetchBreweries.ts
+│ ├── types/
+│ │ ├── breweries.types.ts
+│ │ ├── suggestions.types.ts
+│ │ ├── table.types.ts
+├── public/
+├── package.json
+├── README.md
+├── next.config.js
+├── tailwind.config.js
+├── jest.config.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+src/components/: Contains reusable React components.
+src/pages/: Contains Next.js pages.
+src/styles/: Contains global CSS styles.
+public/: Contains static assets.
+package.json: Contains project dependencies and scripts.
 
-## Learn More
+## Future Improvements
 
-To learn more about Next.js, take a look at the following resources:
+- Add more filtering options (e.g., by state, brewery type).
+- Improve the map component with custom markers and information windows.
+- Implement server side caching to improve performance.
+- Add end to end testing.
+- Add better visual cues for the pagination component.
+- Improve accessability.
+- Contributing
+- Contributions are welcome! Please feel free to submit a pull request or open an issue.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. 1

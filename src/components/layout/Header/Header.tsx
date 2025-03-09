@@ -1,4 +1,5 @@
 import { leagueSpartan } from '@/app/fonts';
+import Link from 'next/link';
 
 const Header: React.FC = () => {
     return (
@@ -6,7 +7,7 @@ const Header: React.FC = () => {
             <h1
                 className={`${leagueSpartan.className} text-3xl font-bold text-black`}
             >
-                The Ale Trail
+                <Link href={`/`}>The Ale Trail</Link>
             </h1>
         </header>
     );

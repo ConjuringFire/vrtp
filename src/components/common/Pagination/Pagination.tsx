@@ -11,9 +11,6 @@ const Pagination: React.FC<PaginationProps> = ({
     totalPages,
     onPageChange
 }) => {
-    console.log(totalPages);
-    console.log(currentPage);
-
     const getVisiblePages = () => {
         const visiblePages = [];
         let startPage = Math.max(1, currentPage - 2);

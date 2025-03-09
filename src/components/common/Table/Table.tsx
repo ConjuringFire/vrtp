@@ -1,7 +1,7 @@
 import { TableProps } from '@/types/table.types';
 import Link from 'next/link';
 
-const Table = <T extends {}>({ data, columns, classes }: TableProps<T>) => {
+const Table = <T extends object>({ data, columns, classes }: TableProps<T>) => {
     return (
         <div className="overflow-x-auto">
             <table
