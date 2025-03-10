@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import BreweryMap from '../MapComponent';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import BreweryDetailsSkeleton from '@/components/brewery/Skeleton/BreweryDetailsSkeleton';
 
 /**
  * a brewery details component for displaying deails about a specific brewery
@@ -13,17 +14,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/solid';
  * @returns {JSX.Element} the rendered BreweryDetails component
  */
 const BreweryDetails = () => {
-    // get brewery ID from route parameters
     const { id } = useParams();
-
-    return (
-        <Suspense fallback={<p>Loading brewery details...</p>}>
-            <BreweryDetailsContent id={id as string} />
-        </Suspense>
-    );
-};
-
-const BreweryDetailsContent = ({ id }: { id: string }) => {
     const { brewery, error, loading } = useBreweryDetails({ id: id as string });
 
     // display error message if fetching brewery details failed
@@ -34,7 +25,7 @@ const BreweryDetailsContent = ({ id }: { id: string }) => {
     // display error message if brewery is not found
     if (!brewery) {
         if (loading) {
-            return <p>Loading ...</p>;
+            return <BreweryDetailsSkeleton />;
         } else {
             return <p>Brewery not found</p>;
         }

@@ -45,7 +45,7 @@ export default function Home() {
                     Welcome to the Ale Trail
                 </h1>
                 <h2 className={`text-3xl font-bold text-center mb-4 md:mb-24`}>
-                    Search for Breweries
+                    Search for local Breweries
                 </h2>
                 <AutosuggestInput />
             </div>
