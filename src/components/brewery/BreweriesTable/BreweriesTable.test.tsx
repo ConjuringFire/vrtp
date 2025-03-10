@@ -1,118 +1,149 @@
 import '@testing-library/jest-dom';
 
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import BreweriesTable from './BreweriesTable';
+import { useFetchBreweries } from '@/hooks/useFetchBreweries';
 import { mockBreweries } from '@/fixtures/breweries.fixtures';
-import { Brewery } from '@/types/breweries.types';
-import { ColumnProps } from '@/types/table.types';
 
-// mock next/link
-jest.mock('next/link', () => ({
-    __esModule: true,
-    default: ({
-        children,
-        href
-    }: {
-        children: React.ReactNode;
-        href: string;
-    }) => (
-        <a data-testid={`link-${href}`} href={href}>
-            {children}
-        </a>
-    )
-}));
+// mock the useFetchBreweries hook
+jest.mock('@/hooks/useFetchBreweries');
 
-// mock the Table component to isolate BreweriesTable
-jest.mock('@/components/common/Table', () => ({
+// mock the BreweryFilter and Pagination components
+jest.mock('@/components/brewery/BreweryFilter', () => ({
     __esModule: true,
-    default: ({
-        data,
-        columns
-    }: {
-        data: Brewery[];
-        columns: ColumnProps<Brewery>[];
-    }) => (
-        <div data-testid="mock-table">
-            {data.length > 0 &&
-                data.map((item, index) => (
-                    <div key={index} data-testid={`brewery-${index}`}>
-                        {columns.map((column, colIndex) => (
-                            <div
-                                key={colIndex}
-                                data-testid={`brewery-${index}-${column.accessor}`}
-                            >
-                                {column.isLink && column.linkAccessor ? (
-                                    <a
-                                        data-testid={`link-/brewery/${item[column.linkAccessor]}`}
-                                    >
-                                        {item[column.accessor]}
-                                    </a>
-                                ) : column.accessor === 'website_url' &&
-                                  item[column.accessor] ? (
-                                    <a
-                                        href={item[column.accessor]?.toString()}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {item[column.accessor]}
-                                    </a>
-                                ) : (
-                                    item[column.accessor]
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+    default: ({ onFilter }: any) => (
+        <div data-testid="brewery-filter">
+            <input
+                type="text"
+                data-testid="name-filter"
+                onChange={e => onFilter(e.target.value, '')}
+            />
+            <input
+                type="text"
+                data-testid="city-filter"
+                onChange={e => onFilter('', e.target.value)}
+            />
         </div>
     )
 }));
 
-const setup = (breweries: Brewery[]) => {
-    render(<BreweriesTable breweries={breweries} />);
-};
+jest.mock('@/components/common/Pagination', () => ({
+    __esModule: true,
+    default: ({ currentPage, totalPages, onPageChange }: any) => (
+        <div data-testid="pagination">
+            <button
+                data-testid="prev-page"
+                onClick={() => onPageChange(currentPage - 1)}
+            >
+                Prev
+            </button>
+            <span>{currentPage}</span>
+            <button
+                data-testid="next-page"
+                onClick={() => onPageChange(currentPage + 1)}
+            >
+                Next
+            </button>
+            <span>Total Pages: {totalPages}</span>
+        </div>
+    )
+}));
 
 describe('BreweriesTable', () => {
-    it('should render the BreweriesTable with brewery data', () => {
-        // render the BreweriesTable component with sample data
-        setup(mockBreweries);
+    it('renders loading state', () => {
+        (useFetchBreweries as jest.Mock).mockReturnValue({
+            breweries: [],
+            loading: true,
+            error: null,
+            totalPages: 1
+        });
 
-        // check that the mock table is loaded
-        expect(screen.getByTestId('mock-table')).toBeInTheDocument();
+        render(<BreweriesTable />);
+        expect(
+            screen.getByTestId('BreweriesTableSkeleton')
+        ).toBeInTheDocument();
+    });
 
-        // check that the brewery data is rendered within the mock Table
-        mockBreweries.forEach((brewery, index) => {
+    it('renders error state', () => {
+        (useFetchBreweries as jest.Mock).mockReturnValue({
+            breweries: [],
+            loading: false,
+            error: 'Failed to fetch breweries',
+            totalPages: 1
+        });
+
+        render(<BreweriesTable />);
+        expect(
+            screen.getByText('Error: Failed to fetch breweries')
+        ).toBeInTheDocument();
+    });
+
+    it('renders breweries table', () => {
+        (useFetchBreweries as jest.Mock).mockReturnValue({
+            breweries: mockBreweries,
+            loading: false,
+            error: null,
+            totalPages: 2
+        });
+
+        render(<BreweriesTable />);
+        expect(screen.getByText('Test Brewery 1')).toBeInTheDocument();
+        expect(screen.getByText('Test Brewery 2')).toBeInTheDocument();
+        expect(screen.getByTestId('pagination')).toBeInTheDocument();
+        expect(screen.getByTestId('brewery-filter')).toBeInTheDocument();
+    });
+
+    it('filters breweries by name', async () => {
+        (useFetchBreweries as jest.Mock).mockReturnValue({
+            breweries: mockBreweries,
+            loading: false,
+            error: null,
+            totalPages: 2
+        });
+
+        render(<BreweriesTable />);
+        fireEvent.change(screen.getByTestId('name-filter'), {
+            target: { value: 'Test Brewery 1' }
+        });
+
+        await waitFor(() => {
             expect(
-                screen.getByTestId(`brewery-${index}-name`)
-            ).toHaveTextContent(brewery.name);
-            expect(
-                screen.getByTestId(`brewery-${index}-brewery_type`)
-            ).toHaveTextContent(brewery.brewery_type);
-            expect(
-                screen.getByTestId(`brewery-${index}-city`)
-            ).toHaveTextContent(brewery.city);
-            expect(
-                screen.getByTestId(`brewery-${index}-country`)
-            ).toHaveTextContent(brewery.country);
-            expect(
-                screen.getByTestId(`brewery-${index}-website_url`)
-            ).toHaveTextContent(brewery.website_url || 'http://test1.com');
-            expect(
-                screen.getByTestId(`brewery-${index}-phone`)
-            ).toHaveTextContent(brewery.phone || '123-456-7890');
-            expect(
-                screen.getByTestId(`link-/brewery/${brewery.id}`)
-            ).toBeInTheDocument();
+                (useFetchBreweries as jest.Mock).mock.calls[1][0].nameFilter
+            ).toBe('Test Brewery 1');
         });
     });
 
-    it('should render an empty table when no breweries are provided', () => {
-        // render the BreweriesTable component with an empty array
-        setup([]);
+    it('filters breweries by city', async () => {
+        (useFetchBreweries as jest.Mock).mockReturnValue({
+            breweries: mockBreweries,
+            loading: false,
+            error: null,
+            totalPages: 2
+        });
 
-        // check that the mock Table component is rendered
-        expect(screen.getByTestId('mock-table')).toBeInTheDocument();
+        render(<BreweriesTable />);
+        fireEvent.change(screen.getByTestId('city-filter'), {
+            target: { value: 'Test City 2' }
+        });
 
-        // check that no brewery data is rendered
-        expect(screen.queryByTestId('brewery-0')).not.toBeInTheDocument();
+        await waitFor(() => {
+            expect(
+                (useFetchBreweries as jest.Mock).mock.calls[1][0].cityFilter
+            ).toBe('Test City 2');
+        });
+    });
+
+    it('handles page change', () => {
+        (useFetchBreweries as jest.Mock).mockReturnValue({
+            breweries: mockBreweries,
+            loading: false,
+            error: null,
+            totalPages: 2
+        });
+
+        render(<BreweriesTable />);
+        fireEvent.click(screen.getByTestId('next-page'));
+        expect((useFetchBreweries as jest.Mock).mock.calls[1][0].page).toBe(2);
     });
 });
