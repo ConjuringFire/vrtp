@@ -12,7 +12,11 @@ jest.mock('@/hooks/useFetchBreweries');
 // mock the BreweryFilter and Pagination components
 jest.mock('@/components/brewery/BreweryFilter', () => ({
     __esModule: true,
-    default: ({ onFilter }: any) => (
+    default: ({
+        onFilter
+    }: {
+        onFilter: (name: string, city: string) => void;
+    }) => (
         <div data-testid="brewery-filter">
             <input
                 type="text"
@@ -30,7 +34,15 @@ jest.mock('@/components/brewery/BreweryFilter', () => ({
 
 jest.mock('@/components/common/Pagination', () => ({
     __esModule: true,
-    default: ({ currentPage, totalPages, onPageChange }: any) => (
+    default: ({
+        currentPage,
+        totalPages,
+        onPageChange
+    }: {
+        currentPage: number;
+        totalPages: number;
+        onPageChange: (page: number) => void;
+    }) => (
         <div data-testid="pagination">
             <button
                 data-testid="prev-page"
