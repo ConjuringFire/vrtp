@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
 import BreweryMap from '../MapComponent';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 /**
  * a brewery details component for displaying deails about a specific brewery
@@ -54,24 +55,35 @@ const BreweryDetailsContent = ({ id }: { id: string }) => {
             <h1 className="text-2xl font-semibold mb-12">{brewery.name}</h1>
             <div className="bg-white rounded-2xl shadow-md p-4 mb-12">
                 <h2 className="text-lg font-semibold mb-2">Details</h2>
-                <p>
-                    <strong>Type:</strong> {brewery.brewery_type}
+                <p className="py-2">
+                    <strong>Type:</strong>{' '}
+                    <span className="flex md:inline">
+                        {brewery.brewery_type}
+                    </span>
                 </p>
-                <p>
-                    <strong>Address:</strong> {brewery.street}, {brewery.city},{' '}
-                    {brewery.state}, {brewery.postal_code}, {brewery.country}
+                <p className="py-2">
+                    <strong>Address:</strong>{' '}
+                    <span className="flex md:inline">
+                        {brewery.street}, {brewery.city}, {brewery.state},{' '}
+                        {brewery.postal_code}, {brewery.country}
+                    </span>
                 </p>
-                <p>
-                    <strong>Phone:</strong> {brewery.phone}
+                <p className="py-2">
+                    <strong>Phone:</strong>{' '}
+                    <span className="flex md:inline">{brewery.phone}</span>
                 </p>
-                <p>
+                <p className="py-2">
                     <strong>Website: </strong>
                     <a
                         href={brewery.website_url || ''}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline active:bg-blue-100"
                     >
-                        {brewery.website_url}
+                        <span className="flex md:inline items-center">
+                            {brewery.website_url}
+                            <ArrowRightIcon className="w-4 h-4 ml-1 block md:hidden" />
+                        </span>
                     </a>
                 </p>
             </div>
