@@ -1,5 +1,6 @@
 import { TableProps } from '@/types/table.types';
 import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 const Table = <T extends object>({ data, columns, classes }: TableProps<T>) => {
     return (
@@ -36,8 +37,10 @@ const Table = <T extends object>({ data, columns, classes }: TableProps<T>) => {
                                     {column.isLink && column.linkAccessor ? (
                                         <Link
                                             href={`/brewery/${row[column.linkAccessor]}`}
+                                            className="text-blue-600 hover:underline active:bg-blue-100 flex items-center"
                                         >
                                             {row[column.accessor]?.toString()}
+                                            <ArrowRightIcon className="w-4 h-4 ml-1 block md:hidden" />
                                         </Link>
                                     ) : column.accessor === 'website_url' &&
                                       row[column.accessor] ? (
@@ -47,11 +50,15 @@ const Table = <T extends object>({ data, columns, classes }: TableProps<T>) => {
                                             ]?.toString()}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            className="text-blue-600 hover:underline active:bg-blue-100 flex items-center"
                                         >
                                             {row[column.accessor]?.toString()}
+                                            <ArrowRightIcon className="w-4 h-4 ml-1 block md:hidden" />
                                         </a>
                                     ) : (
-                                        row[column.accessor]?.toString()
+                                        <span className="flex items-center">
+                                            {row[column.accessor]?.toString()}
+                                        </span>
                                     )}
                                 </td>
                             ))}
