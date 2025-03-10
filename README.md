@@ -2,6 +2,12 @@
 
 This is a React application built with Next.js and Tailwind CSS that allows users to search and explore breweries. It fetches data from the Open Brewery DB API.
 
+## Test Version
+
+You can test the live version of the application here:
+
+[https://vrtp.vercel.app/](https://vrtp.vercel.app/)
+
 ## Features
 
 - **Browse Breweries:** View a list of breweries with pagination.
